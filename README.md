@@ -26,3 +26,6 @@ Apply the patched Java file to a matching full source project. The PowerShell he
 - This repository does **not** currently contain the full project source tree and the patch is **not** a compiled `.jar`.
 
 Use [SAVE-FLOW-TEST-PLAN.md](SAVE-FLOW-TEST-PLAN.md) to test first launch, cancellation, manual re-entry, and protection of existing saves in a backed-up test instance. A successful static check is not proof of a successful game build.
+
+
+Checker mutation tests: `python3 tools/test_save_flow_checker.py`.
