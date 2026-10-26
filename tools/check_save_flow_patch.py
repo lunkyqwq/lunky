@@ -9,8 +9,10 @@ SOURCE_PATH = ROOT / "patches/save-flow-3.4.1/ReflexAiClient.java"
 HELPER_PATH = ROOT / "patches/save-flow-3.4.1/apply-save-flow-patch.ps1"
 NOTES_PATH = ROOT / "patches/save-flow-3.4.1/PATCH-NOTES.md"
 PLAN_PATH = ROOT / "SAVE-FLOW-TEST-PLAN.md"
+MUTATION_TEST_PATH = ROOT / "tools/test_save_flow_checker.py"
+WORKFLOW_PATH = ROOT / ".github/workflows/verify-save-flow-patch.yml"
 
-required = [SOURCE_PATH, HELPER_PATH, NOTES_PATH, PLAN_PATH]
+required = [SOURCE_PATH, HELPER_PATH, NOTES_PATH, PLAN_PATH, MUTATION_TEST_PATH, WORKFLOW_PATH]
 missing = [str(path.relative_to(ROOT)) for path in required if not path.is_file()]
 if missing:
     print("FAIL: required file(s) missing: " + ", ".join(missing))
@@ -20,6 +22,8 @@ source = SOURCE_PATH.read_text(encoding="utf-8")
 helper = HELPER_PATH.read_text(encoding="utf-8")
 notes = NOTES_PATH.read_text(encoding="utf-8")
 plan = PLAN_PATH.read_text(encoding="utf-8")
+mutation_test = MUTATION_TEST_PATH.read_text(encoding="utf-8")
+workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
 
 open_method_start = "private static void openTrainingWorldCreator"
 open_method_index = source.find(open_method_start)
@@ -65,6 +69,8 @@ checks = {
     "notes identify this as source-only": 'not a compiled JAR' in notes,
     "manual plan covers old-save protection": 'Existing-save protection' in plan,
     "manual plan covers cancellation": 'Cancel:' in plan,
+    "mutation tests cover three deliberate regressions": mutation_test.count("(\"") >= 3 and "TemporaryDirectory" in mutation_test,
+    "CI runs checker mutation tests": "python3 tools/test_save_flow_checker.py" in workflow,
 }
 
 failed = False
