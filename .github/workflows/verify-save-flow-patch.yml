@@ -5,6 +5,7 @@ on:
     paths:
       - 'patches/save-flow-3.4.1/**'
       - 'tools/check_save_flow_patch.py'
+      - 'tools/test_save_flow_checker.py'
       - '.github/workflows/verify-save-flow-patch.yml'
       - 'README.md'
       - 'README-zh-CN.md'
@@ -30,3 +31,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run save-flow static regression checks
         run: python3 tools/check_save_flow_patch.py
+      - name: Test checker detects regressions
+        run: python3 tools/test_save_flow_checker.py
