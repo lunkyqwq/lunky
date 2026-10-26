@@ -4,7 +4,8 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$source = Join-Path $PSScriptRoot 'src/main/java/com/example/reflexai/client/ReflexAiClient.java'
+# In this repository the patched client file sits beside this script.
+$source = Join-Path $PSScriptRoot 'ReflexAiClient.java'
 $target = Join-Path $ProjectRoot 'src/main/java/com/example/reflexai/client/ReflexAiClient.java'
 
 if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
