@@ -38,6 +38,10 @@ Checker mutation tests: `python3 tools/test_save_flow_checker.py`.
 
 The extracted 3.4.0 source tree has a client file byte-identical to the patch, but the same-named `ReflexAI-Fabric-3.4.0-source.zip` contains a different client snapshot. Do not treat them as interchangeable. See [SOURCE-INTEGRATION-AUDIT.md](SOURCE-INTEGRATION-AUDIT.md) and [BUILD-READINESS-REPORT.md](BUILD-READINESS-REPORT.md); run `python3 tools/audit_source_provenance.py /path/to/ReflexAI-Fabric-3.4.0 /path/to/ReflexAI-Fabric-3.4.0-source.zip` for a read-only comparison. Run `python3 tools/test_source_provenance_audit.py` to test the audit tool. This does not compile or test the mod.
 
+## Full source archive comparison
+
+The focused provenance audit checks the client entrypoint; `tools/audit_source_archive.py` compares all source files in a ZIP with an extracted directory, including added, missing, and changed files. The observed 3.4.0 ZIP/directory mismatch is recorded in [SOURCE-SNAPSHOT-COMPARISON.md](SOURCE-SNAPSHOT-COMPARISON.md). Run `python3 tools/test_audit_source_archive.py` for regression tests. The tool does not extract or modify the archive.
+
 ## Patch bundle integrity
 
 `PATCH-BUNDLE-MANIFEST.sha256` records hashes for the source-only patch bundle. Run `python3 tools/update_patch_bundle_manifest.py` to regenerate the manifest and `python3 tools/update_patch_bundle_manifest.py --check` to detect stale entries. Then run `python3 tools/verify_patch_bundle.py` and `python3 tools/test_verify_patch_bundle.py` to verify file hashes and test tampering/path-traversal detection. The manifest does not prove the mod compiles or runs in Minecraft.
