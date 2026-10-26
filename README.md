@@ -32,3 +32,8 @@ Checker mutation tests: `python3 tools/test_save_flow_checker.py`.
 
 
 Checker mutation tests: `python3 tools/test_save_flow_checker.py`.
+
+
+## Local source integration audit
+
+The 3.4.0 source tree inspected in the working environment already contains a client source file byte-identical to the save-flow patch. See [SOURCE-INTEGRATION-AUDIT.md](SOURCE-INTEGRATION-AUDIT.md) and run `python3 tools/audit_local_source.py /path/to/ReflexAI-Fabric-3.4.0` to compare a local project. This read-only audit does not compile or test the mod.
