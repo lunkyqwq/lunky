@@ -18,8 +18,8 @@ Apply the patched Java file to a matching full source project. The PowerShell he
 
 ## Verification status
 
-- The patch ZIP and static source checks have been inspected in the working environment.
-- The GitHub Actions workflow runs the reusable static regression checker on relevant changes.
+- The static regression checker now covers **16 source, ordering, helper, documentation, and delimiter checks**.
+- The GitHub Actions workflow runs the reusable static checker on relevant changes.
 - **Gradle compilation and Minecraft 1.21.11 in-game testing have not been completed here.**
 - This repository does **not** currently contain the full project source tree and the patch is **not** a compiled `.jar`.
 
