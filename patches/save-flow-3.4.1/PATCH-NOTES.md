@@ -12,7 +12,7 @@ This folder contains a **source patch only**, not a complete Minecraft mod proje
 
 ## Apply
 
-Run `apply-save-flow-patch.ps1 -ProjectRoot "C:\path\to\full\project"` from this folder. The patched `ReflexAiClient.java` is beside the script in this repository. The helper checks that both source files exist, makes a timestamped backup of the target client file, and then copies the patched file into place. It does not run Gradle or install a JAR.
+Run `apply-save-flow-patch.ps1 -ProjectRoot "C:\path\to\full\project"` from this folder. The patched `ReflexAiClient.java` is beside the script in this repository. The helper checks that both source files exist, refuses to overwrite itself, and skips the operation if the target already matches. Otherwise it creates a timestamped backup, stages the new file, verifies its SHA-256 checksum, and then replaces the target. It does not run Gradle or install a JAR.
 
 ## Verify
 
