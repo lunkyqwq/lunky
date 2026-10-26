@@ -40,4 +40,4 @@ The extracted 3.4.0 source tree has a client file byte-identical to the patch, b
 
 ## Patch bundle integrity
 
-`PATCH-BUNDLE-MANIFEST.sha256` records hashes for the source-only patch bundle. Run `python3 tools/verify_patch_bundle.py` to verify every listed file, and `python3 tools/test_verify_patch_bundle.py` to check that tampering is detected. The manifest does not prove the mod compiles or runs in Minecraft.
+`PATCH-BUNDLE-MANIFEST.sha256` records hashes for the source-only patch bundle. Run `python3 tools/update_patch_bundle_manifest.py` to regenerate the manifest and `python3 tools/update_patch_bundle_manifest.py --check` to detect stale entries. Then run `python3 tools/verify_patch_bundle.py` and `python3 tools/test_verify_patch_bundle.py` to verify file hashes and test tampering/path-traversal detection. The manifest does not prove the mod compiles or runs in Minecraft.
