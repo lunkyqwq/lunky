@@ -15,7 +15,7 @@ REQUIRED = (
     "tools/check_save_flow_patch.py", "tools/test_save_flow_checker.py",
     "tools/audit_local_source.py", "tools/audit_source_provenance.py",
     "tools/test_source_provenance_audit.py", "tools/verify_patch_bundle.py",
-    "tools/test_verify_patch_bundle.py",
+    "tools/test_verify_patch_bundle.py", "tools/update_patch_bundle_manifest.py",
     ".github/workflows/verify-save-flow-patch.yml",
 )
 
