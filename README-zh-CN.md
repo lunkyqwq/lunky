@@ -45,6 +45,10 @@ python3 tools/check_save_flow_patch.py
 
 来源审计回归测试：`python3 tools/test_source_provenance_audit.py`。
 
+## 完整源码归档逐文件比对
+
+原有来源审计只重点检查客户端入口；新增 `tools/audit_source_archive.py` 会把 ZIP 与解压目录逐文件比对，报告目录独有、归档独有和内容不同的文件。当前 3.4.0 ZIP/目录差异记录在 [SOURCE-SNAPSHOT-COMPARISON.md](SOURCE-SNAPSHOT-COMPARISON.md)。运行 `python3 tools/test_audit_source_archive.py` 可执行回归测试。工具不会解压或修改归档。
+
 ## 补丁包完整性校验
 
 `PATCH-BUNDLE-MANIFEST.sha256` 记录纯源码补丁包内文件的哈希。运行 `python3 tools/update_patch_bundle_manifest.py` 生成清单，`python3 tools/update_patch_bundle_manifest.py --check` 检查清单是否过期，再运行 `python3 tools/verify_patch_bundle.py` 校验文件。运行 `python3 tools/test_verify_patch_bundle.py` 检查文件篡改、路径穿越和清单缺项是否会被发现。哈希校验不代表模组已编译或通过游戏测试。
