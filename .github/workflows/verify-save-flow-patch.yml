@@ -1,0 +1,45 @@
+name: Verify save-flow patch
+
+on:
+  push:
+    paths:
+      - 'patches/save-flow-3.4.1/**'
+      - '.github/workflows/verify-save-flow-patch.yml'
+      - 'README.md'
+  pull_request:
+    paths:
+      - 'patches/save-flow-3.4.1/**'
+      - '.github/workflows/verify-save-flow-patch.yml'
+      - 'README.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check save-flow source and patch helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          source = Path("patches/save-flow-3.4.1/ReflexAiClient.java").read_text(encoding="utf-8")
+          helper = Path("patches/save-flow-3.4.1/apply-save-flow-patch.ps1").read_text(encoding="utf-8")
+          checks = {
+              "title-screen button is present": 'Reflex AI 训练存档' in source,
+              "training save name is prefilled": 'TRAINING_WORLD_NAME = "Reflex AI Training"' in source,
+              "marker is written after entering a world": 'pendingTrainingWorldStart && client.world != null' in source,
+              "cancel path clears pending state": 'pendingTrainingWorldStart = false;' in source and 'client.currentScreen instanceof TitleScreen' in source,
+              "patch helper creates a backup": 'Copy-Item -LiteralPath $target -Destination $backup' in helper,
+              "patch helper does not claim to build a JAR": 'does not build or install a JAR' in helper,
+          }
+          for label, ok in checks.items():
+              print(f"{'PASS' if ok else 'FAIL'}: {label}")
+          if not all(checks.values()):
+              raise SystemExit(1)
+          PY
