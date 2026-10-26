@@ -18,13 +18,28 @@ def safe_name(name: str) -> str | None:
     return clean
 
 
+def decode_zip_name(info) -> str:
+    name = info.filename
+    # Some ZIP creators write UTF-8 filename bytes without setting bit 11.
+    # zipfile then decodes those bytes as CP437; recover UTF-8 when possible.
+    if not (info.flag_bits & 0x800):
+        try:
+            recovered = name.encode("cp437").decode("utf-8")
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            pass
+        else:
+            name = recovered
+    return name
+
+
 def archive_files(path: Path) -> dict[str, bytes]:
     with zipfile.ZipFile(path) as zf:
         files = {}
         for info in zf.infolist():
             if info.is_dir():
                 continue
-            name = safe_name(info.filename)
+            original_name = decode_zip_name(info)
+            name = safe_name(original_name)
             if name is None:
                 if ".." in PurePosixPath(info.filename.replace("\\", "/")).parts or info.filename.startswith(("/", "\\")):
                     raise ValueError(f"unsafe ZIP entry path: {info.filename}")
