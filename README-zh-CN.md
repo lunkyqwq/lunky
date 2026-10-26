@@ -47,4 +47,4 @@ python3 tools/check_save_flow_patch.py
 
 ## 补丁包完整性校验
 
-`PATCH-BUNDLE-MANIFEST.sha256` 记录纯源码补丁包内文件的哈希。运行 `python3 tools/verify_patch_bundle.py` 校验清单中的文件，运行 `python3 tools/test_verify_patch_bundle.py` 检查篡改是否会被发现。哈希校验不代表模组已编译或通过游戏测试。
+`PATCH-BUNDLE-MANIFEST.sha256` 记录纯源码补丁包内文件的哈希。运行 `python3 tools/update_patch_bundle_manifest.py` 生成清单，`python3 tools/update_patch_bundle_manifest.py --check` 检查清单是否过期，再运行 `python3 tools/verify_patch_bundle.py` 校验文件。运行 `python3 tools/test_verify_patch_bundle.py` 检查文件篡改、路径穿越和清单缺项是否会被发现。哈希校验不代表模组已编译或通过游戏测试。
