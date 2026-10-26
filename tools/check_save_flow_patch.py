@@ -33,7 +33,8 @@ marker_index = source.find(marker_write)
 without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", " ", source, flags=re.S)
 without_literals = re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', "LIT", without_comments)
 stack = []
-closing = {")": "(", "]": "[", "}": "{"}
+closing = {
+")": "(", "]": "[", "}": "{"}
 delimiters_balanced = True
 for char in without_literals:
     if char in "([{":
@@ -56,7 +57,10 @@ checks = {
     "Java braces, brackets and parentheses balance": delimiters_balanced,
     "helper source path matches bundle layout": "Join-Path $PSScriptRoot 'ReflexAiClient.java'" in helper,
     "helper targets the full project's client source": "src/main/java/com/example/reflexai/client/ReflexAiClient.java" in helper,
-    "helper makes a timestamped backup": 'Copy-Item -LiteralPath $target -Destination $backup' in helper and 'yyyyMMdd-HHmmss' in helper,
+    "helper refuses source-target self-overwrite": 'Patch source and target resolve to the same file' in helper,
+    "helper skips already-applied identical source": '$sourceHash -eq $targetHash' in helper,
+    "helper verifies staged file checksum": '$stagedHash -ne $sourceHash' in helper,
+    "helper makes a timestamped backup": 'Copy-Item -LiteralPath $target -Destination $backup' in helper and 'yyyyMMdd-HHmmss-fff' in helper,
     "helper says it does not build or install a JAR": 'does not build or install a JAR' in helper,
     "notes identify this as source-only": 'not a compiled JAR' in notes,
     "manual plan covers old-save protection": 'Existing-save protection' in plan,
