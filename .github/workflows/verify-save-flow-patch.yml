@@ -26,6 +26,7 @@ on:
       - 'tools/audit_source_provenance.py'
       - 'tools/test_source_provenance_audit.py'
       - 'tools/verify_patch_bundle.py'
+      - 'tools/update_patch_bundle_manifest.py'
       - 'tools/test_verify_patch_bundle.py'
       - 'PATCH-BUNDLE-MANIFEST.sha256'
       - 'SOURCE-INTEGRATION-AUDIT.md'
