@@ -37,3 +37,8 @@ python3 tools/check_save_flow_patch.py
 静态检查不等于成功编译，也不等于游戏内测试。请参考 [SAVE-FLOW-TEST-PLAN.md](SAVE-FLOW-TEST-PLAN.md)，在独立的备份测试实例中检查首次启动、取消后重试、手动按钮和旧存档保护。
 
 **当前状态：没有经过验证的新版 JAR。** 本仓库目前只保存存档引导补丁及其检查材料，不包含完整模组源码。
+
+
+## 完整源码对接审计
+
+本次检查到的 3.4.0 完整源码中，客户端入口与本补丁逐字节一致，因此无需重复应用。详见 [SOURCE-INTEGRATION-AUDIT.md](SOURCE-INTEGRATION-AUDIT.md)。可运行 `python3 tools/audit_local_source.py /path/to/ReflexAI-Fabric-3.4.0` 对本地完整项目进行只读比对；该工具不会编译或测试模组。
