@@ -34,6 +34,6 @@ Checker mutation tests: `python3 tools/test_save_flow_checker.py`.
 Checker mutation tests: `python3 tools/test_save_flow_checker.py`.
 
 
-## Local source integration audit
+## Source snapshot provenance audit
 
-The extracted 3.4.0 source tree has a client file byte-identical to the patch, but the same-named source ZIP contains a different client snapshot. Do not treat them as interchangeable. See [SOURCE-INTEGRATION-AUDIT.md](SOURCE-INTEGRATION-AUDIT.md) and [BUILD-READINESS-REPORT.md](BUILD-READINESS-REPORT.md); run `python3 tools/audit_source_provenance.py /path/to/ReflexAI-Fabric-3.4.0 /path/to/ReflexAI-Fabric-3.4.0-source.zip` for a read-only comparison.
+The extracted 3.4.0 source tree has a client file byte-identical to the patch, but the same-named `ReflexAI-Fabric-3.4.0-source.zip` contains a different client snapshot. Do not treat them as interchangeable. See [SOURCE-INTEGRATION-AUDIT.md](SOURCE-INTEGRATION-AUDIT.md) and [BUILD-READINESS-REPORT.md](BUILD-READINESS-REPORT.md); run `python3 tools/audit_source_provenance.py /path/to/ReflexAI-Fabric-3.4.0 /path/to/ReflexAI-Fabric-3.4.0-source.zip` for a read-only comparison. Run `python3 tools/test_source_provenance_audit.py` to test the audit tool. This does not compile or test the mod.
