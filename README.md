@@ -3,14 +3,23 @@
 This repository currently tracks the **3.4.1 independent training-save UI patch**, not the complete Reflex AI Fabric mod source tree.
 
 ## Current patch
+
 - Source file: [ReflexAiClient.java](patches/save-flow-3.4.1/ReflexAiClient.java)
 - Notes and application steps: [PATCH-NOTES.md](patches/save-flow-3.4.1/PATCH-NOTES.md)
+- Manual test and acceptance checklist: [SAVE-FLOW-TEST-PLAN.md](SAVE-FLOW-TEST-PLAN.md)
+- Static CI checks: [Verify save-flow patch](.github/workflows/verify-save-flow-patch.yml)
 
-The patch opens Minecraft's normal Create World screen, prefills the name `Reflex AI Training`, enables cheats for that newly created world, and keeps a title-screen button for reopening the flow. It does not silently create a world or overwrite an existing save.
+The patch opens Minecraft's normal Create World screen, prefills the name `Reflex AI Training`, and keeps a title-screen button for reopening the flow. It does not silently create a world or overwrite an existing save. The first-launch marker should be written only after the client actually enters a world through this flow.
 
-## Important status
-- This repository does **not** currently contain the full project source tree or a verified build workflow.
-- The patch is source code, **not** a compiled `.jar`.
-- Static checks were performed, but Gradle compilation and Minecraft 1.21.11 in-game testing have not been completed.
+## How to apply
 
-To use it, apply the patched Java file to the matching full source project. Do not copy this repository's patch file directly into the Minecraft `mods` folder.
+Apply the patched Java file to a matching full source project. The PowerShell helper makes a timestamped backup before replacing the target file. Read [PATCH-NOTES.md](patches/save-flow-3.4.1/PATCH-NOTES.md) first and pass the correct project root to the script. The helper does not compile or install anything.
+
+## Verification status
+
+- The patch ZIP and static source checks have been inspected in the working environment.
+- The GitHub Actions workflow performs static source checks only.
+- **Gradle compilation and Minecraft 1.21.11 in-game testing have not been completed here.**
+- This repository does **not** currently contain the full project source tree and the patch is **not** a compiled `.jar`.
+
+Use [SAVE-FLOW-TEST-PLAN.md](SAVE-FLOW-TEST-PLAN.md) to test first launch, cancellation, manual re-entry, and protection of existing saves in a backed-up test instance. Do not treat a successful static check as proof of a successful game build.
