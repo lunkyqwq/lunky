@@ -41,4 +41,4 @@ python3 tools/check_save_flow_patch.py
 
 ## 完整源码对接审计
 
-本次检查到的 3.4.0 完整源码中，客户端入口与本补丁逐字节一致，因此无需重复应用。详见 [SOURCE-INTEGRATION-AUDIT.md](SOURCE-INTEGRATION-AUDIT.md)。可运行 `python3 tools/audit_local_source.py /path/to/ReflexAI-Fabric-3.4.0` 对本地完整项目进行只读比对；该工具不会编译或测试模组。
+解压目录中的客户端入口与本补丁逐字节一致，但同名源码 ZIP 内的客户端文件不同，不能视为同一快照。请查看 [SOURCE-INTEGRATION-AUDIT.md](SOURCE-INTEGRATION-AUDIT.md) 和 [BUILD-READINESS-REPORT.md](BUILD-READINESS-REPORT.md)，并运行 `python3 tools/audit_source_provenance.py /path/to/ReflexAI-Fabric-3.4.0 /path/to/ReflexAI-Fabric-3.4.0-source.zip` 做只读比对。该工具不会编译或测试模组。
