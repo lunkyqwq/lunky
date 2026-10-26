@@ -10,7 +10,7 @@ This folder contains a **source patch only**, not a complete Minecraft mod proje
 - The proposed save name is `Reflex AI Training`; cheats are enabled for that new save only after the user confirms world creation.
 
 ## Apply
-Replace `src/main/java/com/example/reflexai/client/ReflexAiClient.java` in the matching full source tree with this file.
+Use `apply-save-flow-patch.ps1 -ProjectRoot "C:\path\to\full\project"`. It checks the expected source paths, makes a timestamped backup of the existing client file, and then copies the patched file into place. It does not run Gradle or install a JAR.
 
 ## Verification status
-ZIP/source integrity and static checks passed in the working environment. No Gradle build or in-game test has been completed. Do not treat this patch as a verified JAR or as proof that the repository contains all source files.
+ZIP integrity and static checks passed in the working environment. No Gradle build or in-game test has been completed. Do not treat this patch as a verified JAR or as proof that the repository contains all source files.
