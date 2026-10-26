@@ -9,11 +9,12 @@ MANIFEST = ROOT / "PATCH-BUNDLE-MANIFEST.sha256"
 FILES = (
     ".github/workflows/verify-save-flow-patch.yml",
     "BUILD-READINESS-REPORT.md", "README-zh-CN.md", "README.md",
-    "SAVE-FLOW-TEST-PLAN.md", "SOURCE-INTEGRATION-AUDIT.md",
+    "SAVE-FLOW-TEST-PLAN.md", "SOURCE-INTEGRATION-AUDIT.md", "SOURCE-SNAPSHOT-COMPARISON.md",
     "patches/save-flow-3.4.1/PATCH-NOTES.md",
     "patches/save-flow-3.4.1/ReflexAiClient.java",
     "patches/save-flow-3.4.1/apply-save-flow-patch.ps1",
     "tools/audit_local_source.py", "tools/audit_source_provenance.py",
+    "tools/audit_source_archive.py", "tools/test_audit_source_archive.py",
     "tools/check_save_flow_patch.py", "tools/test_save_flow_checker.py",
     "tools/test_source_provenance_audit.py", "tools/test_verify_patch_bundle.py",
     "tools/update_patch_bundle_manifest.py", "tools/verify_patch_bundle.py",
