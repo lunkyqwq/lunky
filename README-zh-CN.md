@@ -39,6 +39,8 @@ python3 tools/check_save_flow_patch.py
 **当前状态：没有经过验证的新版 JAR。** 本仓库目前只保存存档引导补丁及其检查材料，不包含完整模组源码。
 
 
-## 完整源码对接审计
+## 完整源码与归档来源审计
 
-解压目录中的客户端入口与本补丁逐字节一致，但同名源码 ZIP 内的客户端文件不同，不能视为同一快照。请查看 [SOURCE-INTEGRATION-AUDIT.md](SOURCE-INTEGRATION-AUDIT.md) 和 [BUILD-READINESS-REPORT.md](BUILD-READINESS-REPORT.md)，并运行 `python3 tools/audit_source_provenance.py /path/to/ReflexAI-Fabric-3.4.0 /path/to/ReflexAI-Fabric-3.4.0-source.zip` 做只读比对。该工具不会编译或测试模组。
+解压目录中的客户端入口与本补丁逐字节一致，但同名 `ReflexAI-Fabric-3.4.0-source.zip` 内的客户端文件不同，不能视为同一快照。请查看 [SOURCE-INTEGRATION-AUDIT.md](SOURCE-INTEGRATION-AUDIT.md) 和 [BUILD-READINESS-REPORT.md](BUILD-READINESS-REPORT.md)，并运行 `python3 tools/audit_source_provenance.py /path/to/ReflexAI-Fabric-3.4.0 /path/to/ReflexAI-Fabric-3.4.0-source.zip` 做只读比对。该工具不会编译或测试模组。
+
+来源审计回归测试：`python3 tools/test_source_provenance_audit.py`。
